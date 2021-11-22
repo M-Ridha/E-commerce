@@ -39,12 +39,36 @@ const userCtrl = {
             })
             
             res.json({accesstoken}) 
-        } 
-        catch(err){
+        }  catch(err){
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
+        //login User
+    login : async (req,res) => {
+        try {
+            const {email , password} = req.body;
+                //check user.Email exist or not 
+            const user = await Users.findOne({email})
+            if(!user) return res.status(400).json({msg:"Email not found , Please register before"})
+                //check user.password true or false
+            const isMatch = await bcrypt.compare(password , user.password)
+            if (!isMatch) return res.status(400).json({msg:"wrong password"}) 
+                //If login success , create access token and refresh token 
+            const accesstoken = createAccessToken({id: user._id})
+            const refreshtoken = createRefreshToken({id: user._id})
+            res.cookie('refreshtoken', refreshtoken, {
+                httpOnly: true ,
+                path: '/user/refresh_token'
+            })
+            res.json({accesstoken})
+
+        } catch (err) {
             return res.status(500).json({msg: err.message})
         }
     },
     
+        //refreshToken 
     refreshToken: (req,res) => {
         try{
             const rf_token = req.cookies.refreshtoken;
