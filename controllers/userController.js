@@ -77,6 +77,17 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+
+        //Get User Profile
+    getUserProfile : async (req,res) => {
+        try {
+            const user = await Users.findById(req.user.id).select({password:0})
+            if(!user) return res.status(400).json({msg : "user doesn't exist"})
+            res.json(user)
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
     
         //refreshToken 
     refreshToken: (req,res) => {
