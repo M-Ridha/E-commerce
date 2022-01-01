@@ -23,7 +23,6 @@ const categoryCtrl = {
                 name 
             })
             await newCategory.save()
-            
             res.json({msg:'Category has been added successfully'})
         
         } catch (err) {
@@ -44,14 +43,12 @@ const categoryCtrl = {
     updateCategory : async (req,res)=> {
         try {
             await Category.findByIdAndUpdate(req.params.id, {...req.body})
-            
             res.json({msg:"category updated "})
             
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
     }
-
 
 }
 

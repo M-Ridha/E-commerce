@@ -9,5 +9,4 @@ router.get('/userProfile', auth , userCtrl.getUserProfile)
 router.get('/refresh_token', userCtrl.refreshToken )
 
 
-
 module.exports = router

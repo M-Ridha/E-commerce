@@ -60,6 +60,7 @@ router.post('/delete',  auth , authAdmin , (req , res) => {
     
 })
 
+    //remove files from tmp folder
 const removeTmp=(path)=>{
     fs.unlink(path, err =>{
         if(err) throw err ;
