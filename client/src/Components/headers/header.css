@@ -13,6 +13,10 @@ header .logo {
     flex: 1 ;
 }
 
+.logo span{
+    color: #FFCB77;
+}
+
 header a {
     text-transform: uppercase;
     color: #555;
@@ -20,8 +24,22 @@ header a {
 
 header ul li {
     display: inline-block ;
-    opacity: 0.7 ;
+    opacity: 0.8 ;
     padding: 0 20px;
+}
+
+header ul li button {
+    background-color: #FFCB77;
+    border-color: #FFCB77;
+    color: #FEF9EF;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    border-radius: 15px;
+    margin-left: -23px;
 }
 
 header ul li:hover{

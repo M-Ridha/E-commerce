@@ -15,14 +15,15 @@ const Header = () => {
             </div>
 
             <div className='logo'>
-                <h1>
-                    <Link to="/"> ESM l Boutique  </Link>
+                <h1 >
+                    <Link to="/"> One-Click <span> Pick</span> </Link>
                 </h1>
             </div>
 
             <ul>
                 <li> <Link to="/"> Products </Link> </li>
-                <li> <Link to="/login"> Login ⌘ Register </Link> </li>
+                <li> <Link to="/login"> Login </Link> </li>
+                <li> <Link to="/register"> <button> REGISTER </button>  </Link> </li>
                 <li>
                     <img src={Close} alt='' width="30" className='menu' />
                 </li>
