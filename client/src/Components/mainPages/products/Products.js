@@ -1,5 +1,6 @@
 import React , {useContext} from 'react'
 import {GlobalState} from '../../../GlobalState'
+import Loading from '../utils/loading/Loading'
 import ProductItem from '../utils/productItem/ProductItem'
 
 const Products = () => {
@@ -8,13 +9,17 @@ const Products = () => {
     const [products] = state.ProductsAPI.products
 
     return (
-        <div className='products'>
-            {
-                products.map(product => {
-                    return <ProductItem key={product._id} product={product}/>
-                })
-            }
-        </div>
+        <>
+            <div className='products'>
+                {
+                    products.map(product => {
+                        return <ProductItem key={product._id} product={product}/>
+                    })
+                }
+            </div>
+
+            {products.length === 0 && <Loading/>}
+        </>    
     )
 }
 
