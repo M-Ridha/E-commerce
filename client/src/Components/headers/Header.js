@@ -4,9 +4,45 @@ import {GlobalState} from '../../GlobalState'
 import Menu from './icon/menu.svg'
 import Cart from './icon/cart.svg'
 import Close from './icon/close.svg'
+import axios from 'axios';
+
+
+
 
 const Header = () => {
-    const value = useContext(GlobalState)
+
+    const state = useContext(GlobalState)
+    const [isLogged , setIsLogged] = state.userAPI.isLogged
+    const [isAdmin , setIsAdmin] = state.userAPI.isAdmin
+
+        /* if userRole == 1 (admin) display :  */
+    const adminRouter = () => {
+        return (
+            <>
+                <li> <Link to="/create_product"> Create Product </Link> </li>
+                <li> <Link to="/categories"> Categories </Link> </li>
+            </>
+        )
+    }
+
+        /* logout : */
+    const logoutUser = async () => {
+        await axios.get('/user/logout')
+        localStorage.clear()
+        setIsAdmin(false)
+        setIsLogged(false)
+    }
+
+        /* if userRole == 0 (user) display :  */
+    const loggedRouter = () => {
+        return (
+            <>
+                <li> <Link to="/history"> History </Link> </li>
+                <li> <Link to="/" onClick={logoutUser}> Logout </Link> </li>
+            </>
+        )
+    }
+
     return (
         <header>
             
@@ -15,27 +51,39 @@ const Header = () => {
             </div>
 
             <div className='logo'>
-                <h1 >
-                    <Link to="/"> One-Click <span> Pick</span> </Link>
+                <h1>
+                    <Link to="/"> {isAdmin ? "Admin" : <div> One-Click <span> Pick</span> </div> } </Link>
                 </h1>
             </div>
 
             <ul>
-                <li> <Link to="/"> Products </Link> </li>
-                <li> <Link to="/login"> Login </Link> </li>
-                <li> <Link to="/register"> <button> REGISTER </button>  </Link> </li>
+                <li> <Link to="/"> {isAdmin ? "Products" : "Shop"} </Link> </li>
+
+                {isAdmin && adminRouter()}
+                {
+                    isLogged ? loggedRouter() : 
+                        <>
+                            <li> <Link to="/login"> Login </Link> </li>
+                            <li> <Link to="/register"> <button> REGISTER </button>  </Link> </li>
+                        </>
+                }
+
                 <li>
                     <img src={Close} alt='' width="30" className='menu' />
                 </li>
             </ul>
 
-            <div className='cart-icon'>
-                <span>0</span>
-                <Link to="/cart">
-                    <img src={Cart} alt='' width="30"/>
-                </Link>
-            </div>
-        
+            {
+                isAdmin ? '' :
+                    <div className='cart-icon'>
+                        <span>0</span>
+                        <Link to="/cart">
+                            <img src={Cart} alt='' width="30"/>
+                        </Link>
+                    </div>
+            }
+
+
         </header>
     )
 }

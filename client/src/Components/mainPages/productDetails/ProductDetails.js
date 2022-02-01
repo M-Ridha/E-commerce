@@ -8,7 +8,7 @@ const ProductDetails = () => {
 
     const params = useParams()
     const state = useContext(GlobalState)
-    const [products] = state.ProductsAPI.products
+    const [products] = state.productsAPI.products
     const [productDetails , setProductDetails ] = useState([])
     
     useEffect(()=>{
@@ -47,7 +47,7 @@ const ProductDetails = () => {
                     {
                         products.map(product=>{
                             return product.category === productDetails.category 
-                                ? <ProductItem key={product._id} product={product}/> : null 
+                                ? <ProductItem key={product._id} product={product} /> : null 
                         })
                     }
                 </div>
