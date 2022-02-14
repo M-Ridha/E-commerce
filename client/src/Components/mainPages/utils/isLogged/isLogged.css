@@ -1,0 +1,44 @@
+.cl-1{
+    display: flex;
+    flex-direction: column;
+}
+
+.cl-1 .cl-img{
+    margin-top: 20px;
+    text-align: center;
+    margin-right: -10px;
+}
+
+.cl-1 .cl-img img {
+    width : 300px ;
+}
+
+.cl-1 .cl-txt {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.cl-1 .cl-txt h2 {
+    color: #FE6D73;
+    font-size: 40px ;
+    letter-spacing: 3px
+}
+
+.cl-1 .cl-txt p {
+    color: #A9A9A9;
+    font-size: 25px ;
+    letter-spacing: 1.5px;
+    margin-top: 5px;
+}
+
+.cl-1 .cl-txt button{
+    border: solid #227C9D ;
+    background-color: #227C9D;
+    border-radius: 10px;
+    width: 270px;
+    height: 42px;
+    margin-top: 20px;
+    font-size: 18px;
+    letter-spacing: 1.4px;
+    color: #FEF9EF;
+}

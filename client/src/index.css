@@ -48,3 +48,6 @@ button{
 
 /* ------------------------ Login / Register --------------------- */
 @import url("./Components/mainPages/auth/login.css");
+
+/* ------------------------ Cart --------------------- */
+@import url("./Components/mainPages/cart/cart.css");

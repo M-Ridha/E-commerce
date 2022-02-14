@@ -3,7 +3,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     justify-content: center;
-    margin: 20px 0;
+    margin: 20px 47px;
+    margin-top: 74px
 }
 
 /* ------------------- Product Item ------------------- */

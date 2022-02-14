@@ -7,6 +7,11 @@ header{
     justify-content: space-around;
     align-items: center;
     border-bottom: 1px solid #ddd;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 99999;
 }
 
 header .logo {

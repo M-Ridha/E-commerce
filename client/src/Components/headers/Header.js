@@ -12,8 +12,9 @@ import axios from 'axios';
 const Header = () => {
 
     const state = useContext(GlobalState)
-    const [isLogged , setIsLogged] = state.userAPI.isLogged
-    const [isAdmin , setIsAdmin] = state.userAPI.isAdmin
+    const [isLogged] = state.userAPI.isLogged
+    const [isAdmin] = state.userAPI.isAdmin
+    const [cart] = state.userAPI.cart
 
         /* if userRole == 1 (admin) display :  */
     const adminRouter = () => {
@@ -29,8 +30,7 @@ const Header = () => {
     const logoutUser = async () => {
         await axios.get('/user/logout')
         localStorage.clear()
-        setIsAdmin(false)
-        setIsLogged(false)
+        window.location.href = "/"
     }
 
         /* if userRole == 0 (user) display :  */
@@ -76,7 +76,7 @@ const Header = () => {
             {
                 isAdmin ? '' :
                     <div className='cart-icon'>
-                        <span>0</span>
+                        <span> { cart.length }  </span>
                         <Link to="/cart">
                             <img src={Cart} alt='' width="30"/>
                         </Link>
