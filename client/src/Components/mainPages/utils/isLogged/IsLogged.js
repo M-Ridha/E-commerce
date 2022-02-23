@@ -8,7 +8,7 @@ const IsLogged = () => {
         <div className='cl-1'>
 
             <div className='cl-img'>
-                <img src={login} />
+                <img src={login} alt="img" />
             </div>
 
             <div className='cl-txt'>

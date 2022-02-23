@@ -10,7 +10,7 @@ const EmptyCart = () => {
         <div className='cl-1'>
 
             <div className='cl-img'>
-                <img src={emptycart}/>
+                <img src={emptycart} alt="img"/>
             </div>
 
             <div className='cl-txt'>
