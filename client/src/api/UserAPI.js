@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss'
@@ -10,6 +10,8 @@ const UserAPI = (token) => {
     const [isLogged, setIsLogged] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
     const [cart, setCart] = useState([])
+    const [history, setHistory] = useState([])
+    const [callBack , setCallBack] = useState(false)
 
     useEffect(() => {
         if (token) {
@@ -33,6 +35,18 @@ const UserAPI = (token) => {
             getUser()
         }
     }, [token])
+
+    useEffect(()=> {
+        if (token) {
+            const getHistory = async () => {
+                const res = await axios.get('/user/history', {
+                    headers : {Authorization : token}
+                })
+                setHistory(res.data)
+            }
+            getHistory()
+        }
+    },[token, callBack])
 
     const addCart = async (product) => {
         if (!isLogged) return (
@@ -71,7 +85,9 @@ const UserAPI = (token) => {
         isLogged: [isLogged, setIsLogged],
         isAdmin: [isAdmin, setIsAdmin],
         cart: [cart, setCart],
-        addCart: addCart
+        addCart: addCart,
+        history : [history, setHistory],
+        callBack : [callBack , setCallBack]
     };
 }
 

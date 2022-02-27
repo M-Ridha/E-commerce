@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { GlobalState } from '../../../GlobalState'
+import {GlobalState} from '../../../GlobalState'
 import axios from 'axios'
 import EmptyCart from '../utils/emptyCart/EmptyCart';
 import IsLogged from '../utils/isLogged/IsLogged';
@@ -15,6 +15,7 @@ const Cart = () => {
     const [cart, setCart] = state.userAPI.cart
     const [token] = state.token
     const [isLogged] = state.userAPI.isLogged
+    const [callBack , setCallBack] = state.userAPI.callBack
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
@@ -27,7 +28,7 @@ const Cart = () => {
         getTotal()
     }, [cart])
 
-    const addToCart = async () => {
+    const addToCart = async (cart) => {
         await axios.patch('/user/addCart', { cart }, {
             headers: { Authorization: token }
         })
@@ -40,7 +41,7 @@ const Cart = () => {
             }
         })
         setCart([...cart])
-        addToCart()
+        addToCart(cart)
     }
 
     const decrement = (id) => {
@@ -50,7 +51,7 @@ const Cart = () => {
             }
         })
         setCart([...cart])
-        addToCart()
+        addToCart(cart)
     }
 
     const removeProduct = (id) => {
@@ -60,7 +61,7 @@ const Cart = () => {
             }
         })
         setCart([...cart])
-        addToCart()
+        addToCart(cart)
         setTimeout(() => {
             Swal.fire({
                 width: "30%",
@@ -74,7 +75,23 @@ const Cart = () => {
     }
 
     const tranSuccess = async(payment) =>{
-        console.log(payment)
+        const {paymentID , address} = payment;
+
+        await axios.post('/api/payment' , {cart , paymentID , address},{
+            headers: {Authorization : token}
+        })
+        setCart([])
+        addToCart([])
+        Swal.fire({
+            width: "30%",
+            toast: true,
+            icon: 'success',
+            title: "You have successfully placed an order",
+            showConfirmButton: false,
+            timer: 3000
+        })
+        setCallBack(!callBack) 
+
     }  
 
     if (!isLogged)

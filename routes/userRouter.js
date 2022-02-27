@@ -8,6 +8,7 @@ router.get('/logout', userCtrl.logout )
 router.get('/userProfile', auth , userCtrl.getUserProfile)
 router.get('/refresh_token', userCtrl.refreshToken )
 router.patch('/addCart' , auth , userCtrl.addCart )
+router.get('/history' , auth , userCtrl.history )
 
 
 module.exports = router
