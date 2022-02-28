@@ -37,7 +37,7 @@ header ul li button {
     background-color: #FFCB77;
     border-color: #FFCB77;
     color: #FEF9EF;
-    padding: 8px 20px;
+    width: 110px;
     text-align: center;
     text-decoration: none;
     display: inline-block;

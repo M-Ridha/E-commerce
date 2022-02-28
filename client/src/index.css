@@ -54,3 +54,6 @@ button{
 
 /* ------------------------ History --------------------- */
 @import url("./Components/mainPages/history/orderHistory.css");
+
+/* ------------------------ Categories --------------------- */
+@import url('./Components/mainPages/categories/categories.css');

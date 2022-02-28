@@ -39,14 +39,25 @@ const UserAPI = (token) => {
     useEffect(()=> {
         if (token) {
             const getHistory = async () => {
-                const res = await axios.get('/user/history', {
-                    headers : {Authorization : token}
-                })
-                setHistory(res.data)
+                if (isAdmin){
+                        //get history payment for admin
+                    const res = await axios.get('/api/payment', {
+                        headers : {Authorization : token}
+                    })
+                    setHistory(res.data)
+
+                }else{
+                        //get history order for user
+                    const res = await axios.get('/user/history', {
+                        headers : {Authorization : token}
+                    })
+                    setHistory(res.data)
+                
+                }
             }
             getHistory()
         }
-    },[token, callBack])
+    },[token, callBack ,isAdmin])
 
     const addCart = async (product) => {
         if (!isLogged) return (
