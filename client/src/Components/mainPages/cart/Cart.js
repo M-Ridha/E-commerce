@@ -15,7 +15,6 @@ const Cart = () => {
     const [cart, setCart] = state.userAPI.cart
     const [token] = state.token
     const [isLogged] = state.userAPI.isLogged
-    const [callBack , setCallBack] = state.userAPI.callBack
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
@@ -90,8 +89,6 @@ const Cart = () => {
             showConfirmButton: false,
             timer: 3000
         })
-        setCallBack(!callBack) 
-
     }  
 
     if (!isLogged)

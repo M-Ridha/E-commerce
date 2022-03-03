@@ -11,6 +11,7 @@ import Products from './products/Products'
 import Categories from './categories/Categories'
 import NotFound from './utils/notFound/NotFound'
 import IsLogged from './utils/isLogged/IsLogged'
+import CreateProduct from './createProduct/CreateProduct'
 
 
 
@@ -32,6 +33,8 @@ const Pages = () => {
             <Route path="/history" exact component={isLogged ? OrderHistory : IsLogged }/>
             <Route path="/history/:id" exact component={isLogged ? OrderDetails : IsLogged }/>
             <Route path="/categories" exact component={isAdmin ? Categories : IsLogged }/>
+            <Route path="/create_product" exact component={isAdmin ? CreateProduct : IsLogged }/>
+            <Route path="/edit_product/:id" exact component={isAdmin ? CreateProduct : IsLogged }/>
             <Route path="*" exact component={NotFound}/>
             
         </Switch>

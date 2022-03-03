@@ -20,14 +20,10 @@ const Login = () => {
 
     const loginSubmit = async (e) => {
         e.preventDefault()
-
         try {
-            await axios.post('/user/login', {...user})    
-
+            await axios.post('/user/login', {...user})  
             localStorage.setItem('firstLogin', true)
-
             window.location.href = "/"
-
         } catch (err) {
             Swal.fire({
                 width : "30%" , 

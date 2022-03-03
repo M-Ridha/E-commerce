@@ -29,7 +29,7 @@ const Header = () => {
         /* logout : */
     const logoutUser = async () => {
         await axios.get('/user/logout')
-        localStorage.clear()
+        localStorage.removeItem('firstLogin')
         window.location.href = "/"
     }
 
@@ -45,7 +45,7 @@ const Header = () => {
 
     return (
         <header>
-            
+
             <div className='menu'>
                 <img src={Menu} alt='' width="30" />
             </div>
@@ -82,7 +82,6 @@ const Header = () => {
                         </Link>
                     </div>
             }
-
 
         </header>
     )

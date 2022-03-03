@@ -1,10 +1,38 @@
-import React, { useContext } from 'react'
-import {GlobalState} from '../../../GlobalState'
-import {Link} from 'react-router-dom'
+import React, {useContext,useEffect } from 'react'
+import { GlobalState } from '../../../GlobalState'
+import { Link } from 'react-router-dom'
+import axios from 'axios';
+
+
 
 const OrderHistory = () => {
   const state = useContext(GlobalState)
-  const [history] = state.userAPI.history
+  const [history, setHistory] = state.userAPI.history
+  const [isAdmin] = state.userAPI.isAdmin
+  const [token] = state.token
+
+  useEffect(() => {
+    if (token) {
+      const getHistory = async () => {
+        if (isAdmin) {
+          //get history payment for admin
+          const res = await axios.get('/api/payment', {
+            headers: { Authorization: token }
+          })
+          setHistory(res.data)
+
+        } else {
+          //get history order for user
+          const res = await axios.get('/user/history', {
+            headers: { Authorization: token }
+          })
+          setHistory(res.data)
+        }
+      }
+      getHistory()
+    }
+  }, [token,isAdmin,setHistory])
+
 
 
   return (
@@ -28,7 +56,7 @@ const OrderHistory = () => {
                 <td>{new Date(items.createdAt).toLocaleDateString()}</td>
                 <td> <Link to={`/history/${items._id}`}> View </Link> </td>
               </tr>
-            ))
+            )).reverse()
           }
         </tbody>
 

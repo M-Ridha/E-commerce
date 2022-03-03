@@ -9,14 +9,14 @@ import 'sweetalert2/src/sweetalert2.scss'
 
 const Categories = () => {
     const state = useContext(GlobalState)
-    const [categories , setCategories] = state.categoriesAPI.categories
+    const [categories] = state.categoriesAPI.categories
     const [category , setCategory ] = useState('')
     const [callBack , setCallBack] = state.categoriesAPI.callBack
     const [onEdit , setOnEdit] = useState(false)
     const [id , setID] = useState('')
     const [token] = state.token
-    
-    
+
+
     const addCategory = async (e) => {
         e.preventDefault()
         try {
@@ -32,7 +32,7 @@ const Categories = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                
+
             }else{
                 const res = await axios.post('./api/categories',{name : category} , {
                     headers : {Authorization : token}

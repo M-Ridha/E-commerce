@@ -21,14 +21,10 @@ const Register = () => {
 
     const registerSubmit = async (e) => {
         e.preventDefault()
-        
         try {
-            await axios.post('/user/register', {...user})    
-
+            await axios.post('/user/register', {...user})   
             localStorage.setItem('firstLogin', true)
-
             window.location.href = "/"
-
         } catch (err) {
             Swal.fire({
                 width : "30%" , 

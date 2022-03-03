@@ -11,7 +11,6 @@ const UserAPI = (token) => {
     const [isAdmin, setIsAdmin] = useState(false)
     const [cart, setCart] = useState([])
     const [history, setHistory] = useState([])
-    const [callBack , setCallBack] = useState(false)
 
     useEffect(() => {
         if (token) {
@@ -35,29 +34,6 @@ const UserAPI = (token) => {
             getUser()
         }
     }, [token])
-
-    useEffect(()=> {
-        if (token) {
-            const getHistory = async () => {
-                if (isAdmin){
-                        //get history payment for admin
-                    const res = await axios.get('/api/payment', {
-                        headers : {Authorization : token}
-                    })
-                    setHistory(res.data)
-
-                }else{
-                        //get history order for user
-                    const res = await axios.get('/user/history', {
-                        headers : {Authorization : token}
-                    })
-                    setHistory(res.data)
-                
-                }
-            }
-            getHistory()
-        }
-    },[token, callBack ,isAdmin])
 
     const addCart = async (product) => {
         if (!isLogged) return (
@@ -98,7 +74,7 @@ const UserAPI = (token) => {
         cart: [cart, setCart],
         addCart: addCart,
         history : [history, setHistory],
-        callBack : [callBack , setCallBack]
+        
     };
 }
 
