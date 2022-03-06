@@ -4,16 +4,18 @@ import {GlobalState} from '../../../../GlobalState';
 
 
 
-const ProductItem = ({product , isAdmin}) => {
+const ProductItem = ({product, isAdmin, deleteProduct , handleCheck}) => {
 
     const state = useContext(GlobalState)
     const addCart = state.userAPI.addCart
+
+
 
     return (
         <div className='product_card'>
 
             {
-                isAdmin && <input type='checkbox' checked={product.checked}/>
+                isAdmin && <input type='checkbox' checked={product.checked} onChange={()=> handleCheck(product._id)}/>
             }
 
             <img src={product.images.url} alt=''/>
@@ -29,7 +31,7 @@ const ProductItem = ({product , isAdmin}) => {
                     isAdmin ? 
                             /* for admin */
                         <>
-                            <Link id='btn_buy' to="#!" > Delete </Link>
+                            <Link id='btn_buy' to="#!" onClick={()=>deleteProduct(product._id , product.images.public_id)} > Delete </Link>
                             <Link id='btn_view' to={`/edit_product/${product._id}`} > Edit </Link>
                         </> 
                         :

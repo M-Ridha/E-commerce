@@ -1,12 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react'
+import {useHistory, useParams} from 'react-router-dom'
 import { GlobalState } from '../../../GlobalState'
 import axios from 'axios';
 import Loading from '../utils/loading/Loading'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
-import {useHistory, useParams} from 'react-router-dom'
-
-
 
 
 const initialState = {
@@ -31,6 +29,7 @@ const CreateProduct = () => {
     const [token] = state.token
     const [products] = state.productsAPI.products
     const [onEdit , setOnEdit] = useState(false)
+    const [callBack, setCallBack] = state.productsAPI.callBack
 
     const history = useHistory()
     const param = useParams()
@@ -204,8 +203,8 @@ const CreateProduct = () => {
                 })
             }
 
-            setImages(false)
-            setProduct(initialState)
+            setCallBack(!callBack)
+
             history.push('/')
 
         } catch (err) {

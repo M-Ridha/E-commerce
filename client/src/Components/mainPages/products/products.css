@@ -7,5 +7,30 @@
     margin-top: 74px
 }
 
+.delete-all{
+    text-align: right;
+    margin: 20px
+}
+
+.delete-all input{
+    height: 25px;
+    width: 25px;
+    transform: translateY(5px);
+    margin: 0 15px
+}
+
+.delete-all span {
+    text-transform: uppercase;
+    color: #227C9D;
+    letter-spacing: 1.3px;
+}
+
+.delete-all button {
+    border: 1px solid #FE6D73;
+    padding: 10px 25px;
+    color: #FE6D73;
+    text-transform: uppercase
+}
+
 /* ------------------- Product Item ------------------- */
 @import url('../utils/productItem/productItem.css');
