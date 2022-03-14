@@ -1,4 +1,5 @@
 const Category = require ('../models/categoryModel')
+const Products = require ('../models/productModel')
 
 const categoryCtrl = {
 
@@ -6,7 +7,6 @@ const categoryCtrl = {
         try {
             const Categories = await Category.find()
             res.json(Categories)
-            
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
@@ -24,7 +24,6 @@ const categoryCtrl = {
             })
             await newCategory.save()
             res.json({msg:'Category has been added successfully'})
-        
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
@@ -32,9 +31,12 @@ const categoryCtrl = {
 
     deleteCategory : async (req,res) => {
         try {
+                /* msg alert to delete Product in relation with Category before delete category */
+            const products = await Products.findOne({category : req.params.id})
+            if(products) return res.status(500).json({msg: "Please delete all products with a relationShip"})
+                /* delete Category */
             await Category.findByIdAndDelete(req.params.id)
             res.json({msg:'Category has been deleted successfully'})
-
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
@@ -44,7 +46,6 @@ const categoryCtrl = {
         try {
             await Category.findByIdAndUpdate(req.params.id, {...req.body})
             res.json({msg:"category updated "})
-            
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }

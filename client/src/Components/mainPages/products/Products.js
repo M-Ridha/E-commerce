@@ -3,6 +3,8 @@ import {GlobalState} from '../../../GlobalState'
 import axios from 'axios'
 import Loading from '../utils/loading/Loading'
 import ProductItem from '../utils/productItem/ProductItem'
+import Filters from './Filters'
+import LoadMore from './LoadMore'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 
@@ -77,6 +79,8 @@ const Products = () => {
 
     return (
         <>
+            <Filters/> 
+
             {
                 isAdmin && 
                 <div className='delete-all'>
@@ -99,6 +103,8 @@ const Products = () => {
                     })
                 }
             </div>
+
+            <LoadMore/>
 
             {products.length === 0 && <Loading/>}
         </>    
