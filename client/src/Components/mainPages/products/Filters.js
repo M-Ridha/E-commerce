@@ -49,7 +49,7 @@ const Filters = () => {
                 onChange={handleSearch}
             />
 
-            <div className='row'>
+            <div className='row sort'>
                 <span> Sort By: </span>
                 <select value={sort} onChange={handleSort}>
                     <option value=''> Newest </option>

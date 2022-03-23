@@ -1,4 +1,4 @@
-import React, {useContext } from 'react'
+import React, {useContext, useState } from 'react'
 import {Link} from 'react-router-dom'
 import {GlobalState} from '../../GlobalState'
 import Menu from './icon/menu.svg'
@@ -15,6 +15,7 @@ const Header = () => {
     const [isLogged] = state.userAPI.isLogged
     const [isAdmin] = state.userAPI.isAdmin
     const [cart] = state.userAPI.cart
+    const [menu, setMenu] = useState(false)
 
         /* if userRole == 1 (admin) display :  */
     const adminRouter = () => {
@@ -43,10 +44,18 @@ const Header = () => {
         )
     }
 
+    const toggleMenu = () => {
+        setMenu(!menu)
+    }
+
+    const styleMenu = {
+        left : menu ? 0 :  "-100%"
+    }
+
     return (
         <header>
 
-            <div className='menu'>
+            <div className='menu' onClick={toggleMenu}>
                 <img src={Menu} alt='' width="30" />
             </div>
 
@@ -56,7 +65,7 @@ const Header = () => {
                 </h1>
             </div>
 
-            <ul>
+            <ul style={styleMenu}>
                 <li> <Link to="/"> {isAdmin ? "Products" : "Shop"} </Link> </li>
 
                 {isAdmin && adminRouter()}
@@ -68,7 +77,7 @@ const Header = () => {
                         </>
                 }
 
-                <li>
+                <li onClick={toggleMenu}>
                     <img src={Close} alt='' width="30" className='menu' />
                 </li>
             </ul>
